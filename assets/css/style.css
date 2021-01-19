@@ -1,0 +1,183 @@
+/*=== VARIABLES CSS ===*/
+:root {
+  --primary-color: #d9d9d9;
+  --secondary-color: #fff;
+  --shimmer-color: #d9d9d9;
+  --shimmer-transparent-color: rgba(0,0,0,0.05);
+  --switch-color: #161625;
+}
+[data-theme="dark"] {
+  --primary-color: #606173;
+  --secondary-color: #161625;
+  --shimmer-color: #8D8EA9;
+  --shimmer-transparent-color: rgba(213,214,255, 0.2);
+  --switch-color: #fff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--secondary-color);
+}
+
+/*=== CARD SKELETON ===*/
+.card {
+  max-width: 350px;
+  width: 90%;
+  border: 1px solid var(--primary-color);
+  border-radius: 10px;
+  padding: 30px;
+}
+.card .header .img {
+  height: 70px;
+  width: 70px;
+  background: var(--primary-color);
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+}
+.header .details {
+  margin-left: 20px;
+}
+.details span {
+  background: var(--primary-color);
+  display: block;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+}
+.details .name {
+  width: 100px;
+  height: 15px;
+}
+.details .about {
+  width: 150px;
+  height: 13px;
+  margin-top: 10px;
+}
+
+.card .content {
+  margin: 25px 0;
+}
+.content .line {
+  background: var(--primary-color);
+  height: 13px;
+  width: 100%;
+  border-radius: 10px;
+  margin: 10px 0;
+  position: relative;
+  overflow: hidden;
+}
+.content .line-1 {
+  width: calc(100% - 15%);
+}
+.content .line-3 {
+  width: calc(100% - 40%);
+}
+.card .btns {
+  display: flex;
+}
+.card .btns .btn {
+  height: 45px;
+  width: 100%;
+  background: var(--primary-color);
+  border-radius: 25px;
+  position: relative;
+  overflow: hidden;
+}
+.btns .btn-1 {
+  margin-right: 8px;
+}
+.btns .btn-2 {
+  margin-left: 8px;
+}
+
+/* Animation */
+.card .header .img::before,
+.details span::before,
+.content .line::before,
+.btns .btn::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-image: linear-gradient(to right, var(--primary-color) 0%, var(--shimmer-transparent-color) 20%, var(--primary-color) 40%, var(--primary-color) 100%);
+  background-size: 450px 400px;
+  background-repeat: no-repeat;
+  animation: shimmer 1s linear infinite;
+}
+.details span::before,
+.btns .btn-2::before {
+  animation-delay: 0.2s;
+}
+@keyframes shimmer {
+  0% {
+    background-position: -450px 0;
+  }
+  100% {
+    background-position: 450px 0;
+  }
+}
+
+/*=== Switch Theme ===*/
+.theme-switch-wrapper {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 10px;
+  right: 25px;
+}
+.theme-switch {
+  display: inline-block;
+  position: relative;
+  height: 34px;
+  width: 60px;
+}
+.theme-switch input {
+  display: none;
+}
+
+.slider {
+  background-color: var(--primary-color);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  cursor: pointer;
+  transition: .4s;
+}
+.slider::before {
+  content: "";
+  background-color: var(--switch-color);
+  position: absolute;
+  bottom: 4px;
+  left: 4px;
+  width: 26px;
+  height: 26px;
+  transition: .4s;
+}
+
+input[type="checkbox"]:checked + .slider:before {
+  transform: translateX(26px);
+}
+.slider.round {
+border-radius: 32px;
+}
+.slider.round:before {
+  border-radius: 50%;
+}
